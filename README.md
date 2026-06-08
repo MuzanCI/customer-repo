@@ -2,3 +2,5 @@
 
 This repo is used to test MuzanCI from customer's perspective.
 
+GH -> ngrok -> macOS laptop -> FreeBSD VM
+
