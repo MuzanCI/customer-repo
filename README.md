@@ -2,5 +2,5 @@
 
 This repo is used to test MuzanCI from customer's perspective.
 
-Fix webhook URL.
+Send webhook
 
