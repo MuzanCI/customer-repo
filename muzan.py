@@ -54,6 +54,7 @@ build_job = Job(
     name="build_job",
     steps=[
         checkout(
+            clone_url=GIT_CLONE_URL,
             branch=GIT_BRANCH,
         ),
         Step(
