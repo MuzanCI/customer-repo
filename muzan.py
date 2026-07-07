@@ -54,7 +54,6 @@ build_job = Job(
     name="build_job",
     steps=[
         checkout(
-            repo=GIT_REPO,  # injected by the interpreter
             branch=GIT_BRANCH,
         ),
         Step(
