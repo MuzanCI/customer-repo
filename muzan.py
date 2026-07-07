@@ -9,10 +9,10 @@
 # ------------------------------------------------------------------------------
 
 
-def checkout(repo, branch):
+def checkout(clone_url, branch):
     return Step(
-        name="checkout {} {}".format(repo, branch),
-        command="git checkout {} {}".format(repo, branch),
+        name="checkout {} {}".format(clone_url, branch),
+        command="git clone --branch {} {} .".format(branch, clone_url),
     )
 
 
