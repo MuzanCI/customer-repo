@@ -53,23 +53,27 @@ aws_secret = Secret(
 build_job = Job(
     name="build_job",
     steps=[
-        checkout(
-            clone_url=GIT_CLONE_URL,
-            branch=GIT_BRANCH,
-        ),
+        # checkout(
+        #     clone_url=GIT_CLONE_URL,
+        #     branch=GIT_BRANCH,
+        # ),
+        # Step(
+        #     name="build",
+        #     command="cargo build --release",
+        # ),
+        # attest(
+        #     glob="target/release/my_binary",
+        #     oidc_issuer="https://oidc.example.com",
+        # ),
+        # upload(
+        #     source="target/release/my_binary",
+        #     destination="s3://my-bucket/{}/my_binary".format(GIT_COMMIT),
+        #     secrets=[aws_secret],
+        # ),
         Step(
             name="build",
-            command="cargo build --release",
-        ),
-        attest(
-            glob="target/release/my_binary",
-            oidc_issuer="https://oidc.example.com",
-        ),
-        upload(
-            source="target/release/my_binary",
-            destination="s3://my-bucket/{}/my_binary".format(GIT_COMMIT),
-            secrets=[aws_secret],
-        ),
+            command="echo 'build_job executing...'",
+        )
     ],
 )
 
@@ -79,30 +83,38 @@ test_job = Job(
         build_job,  # TODO: evaluate to Need(job_id, Completed)
     ],
     steps=[
-        download(
-            source="s3://my-bucket/{}/my_binary".format(GIT_COMMIT),
-            destination="./my_binary",
-        ),
+        # download(
+        #     source="s3://my-bucket/{}/my_binary".format(GIT_COMMIT),
+        #     destination="./my_binary",
+        # ),
+        # Step(
+        #     name="test",
+        #     command="./my_binary --test --output results.json",
+        # ),
+        # attest(
+        #     glob="results.json",
+        #     oidc_issuer="https://oidc.example.com",
+        # ),
         Step(
             name="test",
-            command="./my_binary --test --output results.json",
-        ),
-        attest(
-            glob="results.json",
-            oidc_issuer="https://oidc.example.com",
-        ),
+            command="echo 'test_job executing...'",
+        )
     ],
 )
 
 clean_up_job = Job(
     name="clean_up_job",
     needs=[
-        test_job.failed,  # TODO: evaluate to Need(job_id, Failed)
+        test_job.failed,
     ],
     steps=[
+        # Step(
+        #     name="clean up",
+        #     command="rm -rf target/release/my_binary",
+        # ),
         Step(
             name="clean up",
-            command="rm -rf target/release/my_binary",
+            command="echo 'clean_up_job executing...'",
         ),
     ],
 )
