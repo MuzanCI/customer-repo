@@ -133,5 +133,5 @@ for arch in ["x86_64", "arm64"]:
         when=[
             Push(),
         ],
-        targets=[test_job, external_job],
+        needs=[test_job, external_job],
     )
