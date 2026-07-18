@@ -123,6 +123,10 @@ no_name_job = Job(
     steps=[],
 )
 
+no_name2_job = Job(
+    steps=[],
+)
+
 load("external.py", "external_job")
 
 # pipeline() is called for its side effect: it registers the pipeline in the
